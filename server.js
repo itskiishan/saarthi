@@ -102,8 +102,14 @@ buildIndex();
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
 
-// Static hosting (so you can run the site via the backend if you want)
-app.use('/', express.static(ROOT));
+// Static hosting and explicit root route for frontend
+app.use(express.static(ROOT));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(ROOT, 'index.html'));
+});
+app.get('/index.html', (req, res) => {
+  res.sendFile(path.join(ROOT, 'index.html'));
+});
 
 // In-memory session store (simple and hackathon-friendly)
 const sessions = new Map(); // sessionId -> { lastIntentId, lastLang, history: [...] }
