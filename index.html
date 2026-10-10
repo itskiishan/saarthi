@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Evergreen College — Discover. Learn. Thrive.</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Tailwind config: extend with custom animations and keyframes
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: "#eefcfb",
+              100: "#d5f6f3",
+              200: "#aeece6",
+              300: "#75ddd3",
+              400: "#3fc8bd",
+              500: "#1bada4",
+              600: "#109087",
+              700: "#0f726c",
+              800: "#115e59",
+              900: "#124c49"
+            }
+          },
+          boxShadow: {
+            glow: "0 10px 30px rgba(16,144,135,0.35)",
+            "inner-soft": "inset 0 1px 6px rgba(0,0,0,0.12)"
+          },
+          keyframes: {
+            floaty: {
+              "0%,100%": { transform: "translateY(0)" },
+              "50%": { transform: "translateY(-6px)" }
+            },
+            pulseSoft: {
+              "0%,100%": { opacity: 0.75, filter: "saturate(1)" },
+              "50%": { opacity: 1, filter: "saturate(1.2)" }
+            },
+            pingRing: {
+              "0%": { transform: "scale(1)", opacity: 0.8 },
+              "80%,100%": { transform: "scale(1.7)", opacity: 0 }
+            },
+            typing: {
+              "0%": { width: "0" },
+              "100%": { width: "100%" }
+            },
+            slideUp: {
+              "0%": { transform: "translateY(20px)", opacity: 0 },
+              "100%": { transform: "translateY(0)", opacity: 1 }
+            }
+          },
+          animation: {
+            floaty: "floaty 4s ease-in-out infinite",
+            pulseSoft: "pulseSoft 2.4s ease-in-out infinite",
+            pingRing: "pingRing 1.6s cubic-bezier(0,0,.2,1) infinite",
+            slideUp: "slideUp .4s ease-out forwards",
+          },
+          backdropBlur: {
+            xs: "2px"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for chat/faq panes */
+    .thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+    .thin-scroll::-webkit-scrollbar-thumb { background: rgba(17, 94, 89, 0.35); border-radius: 9999px; }
+    .thin-scroll::-webkit-scrollbar-track { background: transparent; }
+
+    /* Click ripple for trigger button */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.35) 10%, transparent 11%) center/10px 10px no-repeat;
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+    .ripple:active:after { opacity: 1; transition: 0s; }
+
+    /* Typewriter effect mask (for bot intro line) */
+    .type-mask {
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid rgba(255,255,255,.6);
+      animation: typing 2.5s steps(40,end), blink .9s step-end infinite alternate;
+    }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink { 50% { border-color: transparent } }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 via-white to-slate-100 text-slate-800 antialiased selection:bg-brand-200 selection:text-brand-900">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-30 backdrop-blur bg-white/70 border-b border-slate-200/60">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <span class="absolute -inset-2 bg-gradient-to-tr from-brand-400 to-emerald-500 rounded-full blur opacity-60"></span>
+          <div class="relative h-10 w-10 rounded-full bg-gradient-to-tr from-brand-600 to-emerald-500 shadow-glow flex items-center justify-center">
+            <!-- Inline bot/book logo -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="text-white">
+              <path d="M3 5.5A2.5 2.5 0 0 1 5.5 3H18a3 3 0 0 1 3 3v12a1 1 0 0 1-1.447.894L17 17.618l-2.553 1.276A1 1 0 0 1 13 18V6H5.5A2.5 2.5 0 0 1 3 3.5v2Z" fill="currentColor" opacity=".85"/>
+              <circle cx="9.5" cy="9" r="1.2" fill="#A7F3D0"/>
+              <circle cx="13.5" cy="9" r="1.2" fill="#A7F3D0"/>
+            </svg>
+          </div>
+        </div>
+        <span class="font-semibold tracking-tight text-slate-800 text-lg">Evergreen College</span>
+      </div>
+     <nav class="hidden md:flex items-center gap-8 text-sm">
+  <a href="#about" class="flex items-center gap-2 hover:text-brand-700 transition">
+    <!-- About Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm1 15h-2v-2h2Zm0-4h-2V7h2Z"/>
+    </svg>
+    About
+  </a>
+
+  <a href="#contact" class="flex items-center gap-2 hover:text-brand-700 transition">
+    <!-- Contact Icon: Phone -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.11-.21 11.36 11.36 0 0 0 3.58.57 1 1 0 0 1 1 1v3.64a1 1 0 0 1-1 1A17 17 0 0 1 3 5a1 1 0 0 1 1-1h3.64a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.58 1 1 0 0 1-.21 1.11l-2.2 2.2z"/>
+    </svg>
+    Contact
+  </a>
+
+  <a href="#programs" class="flex items-center gap-2 hover:text-brand-700 transition">
+    <!-- Programs Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M4 4h16v2H4zm0 6h16v2H4zm0 6h16v2H4z"/>
+    </svg>
+    Programs
+  </a>
+</nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 transition shadow-glow">
+          <span>Apply</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute -top-32 -right-24 h-80 w-80 bg-gradient-to-tr from-emerald-300 to-brand-400 rounded-full blur-3xl opacity-40 animate-pulseSoft"></div>
+      <div class="absolute -bottom-24 -left-24 h-96 w-96 bg-gradient-to-tr from-sky-300 to-emerald-300 rounded-full blur-3xl opacity-40 animate-pulseSoft" style="animation-delay:.8s"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 py-20 sm:py-28 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs border border-emerald-200 w-max shadow-inner">
+          <span class="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
+          <span>Admissions Open — Fall 2025</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900">
+          Discover. Learn. <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-700 via-emerald-600 to-sky-600">Thrive.</span>
+        </h1>
+        <p class="text-slate-600 text-lg leading-relaxed">
+          Evergreen College empowers curious minds with real-world learning, a vibrant community, and a future-ready curriculum.
+        </p>
+        <div class="flex items-center gap-4">
+          <a href="#about" class="px-5 py-3 rounded-xl bg-slate-900 text-white hover:bg-slate-800 transition">Explore Campus</a>
+          <a href="#contact" class="px-5 py-3 rounded-xl bg-white text-slate-900 border border-slate-200 hover:border-slate-300 shadow-sm transition">Talk to Admissions</a>
+        </div>
+        <p class="text-sm text-slate-500 type-mask max-w-md">Tip: Tap the animated bot to chat with our assistant.</p>
+      </div>
+      <div class="relative">
+        <div class="relative rounded-3xl p-3 bg-gradient-to-tr from-white to-slate-50 border border-slate-200/70 shadow-xl">
+          <img alt="Campus" class="rounded-2xl w-full h-72 sm:h-96 object-cover"
+               src="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><defs><linearGradient id='g' x1='0' x2='1'><stop stop-color='%23e6fffb'/><stop offset='1' stop-color='%23dbf4ff'/></linearGradient></defs><rect width='100%' height='100%' fill='url(%23g)'/><g fill='%2390cdf4' opacity='.35'><circle cx='200' cy='300' r='90'/><circle cx='700' cy='180' r='60'/><circle cx='1000' cy='500' r='120'/></g><g stroke='%23115954' stroke-width='6' opacity='.6' fill='none'><path d='M100 650 L1100 650'/><rect x='250' y='350' width='700' height='220' rx='24'/><path d='M250 350 L600 250 L950 350'/></g></svg>" />
+          <div class="absolute -bottom-6 left-10 right-10 bg-white/80 backdrop-blur-xs border border-slate-200 rounded-2xl p-4 shadow-lg animate-floaty">
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-gradient-to-br from-brand-500 to-emerald-500 shadow-glow flex items-center justify-center relative">
+                <span class="absolute inset-0 rounded-full animate-pingRing bg-emerald-400/40"></span>
+                <svg width="20" height="20" viewBox="0 0 24 24" class="text-white relative">
+                  <path d="M12 2a5 5 0 0 0-5 5v1H6a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V10a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Z" fill="currentColor" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-slate-800">Smart Advising</p>
+                <p class="text-sm text-slate-600">Instant answers about programs, fees, and campus life.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="max-w-7xl mx-auto px-6 py-20">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">About us</h2>
+        <p class="mt-4 text-slate-600 leading-relaxed">
+          At Evergreen College, we blend academic rigor with hands-on experience. Our students learn by doing,
+          collaborating, and leading — guided by faculty who care and supported by a campus that feels like home.
+        </p>
+        <ul class="mt-6 space-y-3">
+          <li class="flex items-start gap-3">
+            <span class="h-6 w-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">✓</span>
+            <p><span class="font-semibold">Future-ready programs:</span> technology, arts, business, and sciences.</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="h-6 w-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">✓</span>
+            <p><span class="font-semibold">Global community:</span> inclusive, diverse, and collaborative culture.</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="h-6 w-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">✓</span>
+            <p><span class="font-semibold">Career focus:</span> internships, labs, and real-world projects.</p>
+          </li>
+        </ul>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
+          <p class="text-4xl font-extrabold text-emerald-600">24:1</p>
+          <p class="text-slate-600 mt-2">Student–faculty ratio for personalized learning</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
+          <p class="text-4xl font-extrabold text-emerald-600">90%</p>
+          <p class="text-slate-600 mt-2">Graduates employed or in grad school within 6 months</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
+          <p class="text-4xl font-extrabold text-emerald-600">150+</p>
+          <p class="text-slate-600 mt-2">Student clubs and organizations</p>
+        </div>
+        <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
+          <p class="text-4xl font-extrabold text-emerald-600">50+</p>
+          <p class="text-slate-600 mt-2">Majors and minors across disciplines</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 py-20">
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">Contact admissions</h2>
+          <p class="mt-4 text-slate-600">
+            Got questions? We’re here to help. Send us a message and our team will get back to you.
+          </p>
+          <div class="mt-8 space-y-4 text-slate-700">
+            <p><span class="font-semibold">Email:</span> admissions@evergreencollege.edu</p>
+            <p><span class="font-semibold">Phone:</span> +91-98765-43210</p>
+            <p><span class="font-semibold">Hours:</span> Mon–Fri, 9:00–17:00 IST</p>
+          </div>
+        </div>
+        <form class="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-inner space-y-5" onsubmit="event.preventDefault(); this.reset(); alert('Thanks! We will get back to you soon.');">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Full name</label>
+            <input required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
+            <input type="email" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+            <textarea rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition"></textarea>
+          </div>
+          <button class="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-600 text-white font-medium shadow-glow hover:bg-emerald-700 active:scale-[.98] transition">
+            Send message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-slate-500">© <span id="year"></span> Evergreen College. All rights reserved.</p>
+      <div class="text-sm text-slate-500">
+        Made with care for curious minds.
+      </div>
+    </div>
+  </footer>
+
+  <!-- CHATBOT TRIGGER BUTTON -->
+  <button id="chatTrigger"
+          class="ripple group fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-gradient-to-tr from-brand-600 to-emerald-500 text-white shadow-glow flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
+          aria-label="Open chatbot">
+    <span class="absolute inset-0 rounded-full bg-white/10 opacity-0 group-hover:opacity-100 transition"></span>
+    <svg viewBox="0 0 24 24" class="w-7 h-7 relative">
+      <path d="M12 2a5 5 0 0 0-5 5v1H6a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h2.5l2.5 3 2.5-3H18a4 4 0 0 0 4-4V10a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Z" fill="currentColor"/>
+      <circle cx="9.5" cy="9" r="1.2" fill="#A7F3D0"/>
+      <circle cx="14.5" cy="9" r="1.2" fill="#A7F3D0"/>
+    </svg>
+    <span class="sr-only">Open chatbot</span>
+  </button>
+
+  <!-- CHATBOT MODAL -->
+  <div id="chatOverlay" class="fixed inset-0 z-50 hidden">
+    <!-- Overlay backdrop -->
+    <div id="backdrop" class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm opacity-0 transition-opacity"></div>
+
+    <!-- Modal container -->
+    <div id="chatModal"
+         class="absolute inset-x-3 sm:inset-x-10 md:inset-x-24 lg:inset-x-40 top-1/2 -translate-y-1/2 mx-auto bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100 rounded-3xl border border-slate-700/60 shadow-2xl scale-95 opacity-0 transition-all duration-300">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between px-5 sm:px-8 py-4 border-b border-slate-700/60">
+        <div class="flex items-center gap-3">
+          <div class="relative h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-400 to-brand-500 shadow-glow flex items-center justify-center">
+            <span class="absolute -inset-1 bg-gradient-to-br from-emerald-400/30 to-brand-500/30 blur-xl rounded-xl"></span>
+            <svg viewBox="0 0 24 24" class="w-6 h-6 relative text-white">
+              <path d="M12 2a5 5 0 0 0-5 5v1H6a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V10a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Z" fill="currentColor"/>
+            </svg>
+          </div>
+         <div>
+  <h1 class="font-semibold text-2xl">SaarThi</h1>
+  <p class="text-xs text-emerald-300/90"></p>
+</div>
+
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="minimizeBtn" class="hidden sm:inline-flex px-3 py-2 text-xs rounded-lg bg-slate-800 border border-slate-700 hover:bg-slate-700/70 transition">Minimize</button>
+          <button id="closeBtn" class="p-2 rounded-lg hover:bg-slate-700/60 transition" aria-label="Close">
+            <svg viewBox="0 0 24 24" class="w-5 h-5 text-slate-300">
+              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Page 1: Authentication -->
+      <div id="authView" class="px-6 sm:px-10 py-10 grid md:grid-cols-2 gap-8 items-center">
+        <div class="space-y-4">
+          <h3 class="text-2xl font-bold">Welcome!</h3>
+          <p class="text-slate-300">
+           No question too small, no doubt too big—Saarthi is here.
+          </p>
+          <div class="mt-6 grid sm:grid-cols-2 gap-4">
+            <button id="signInBtn"
+                    class="group px-5 py-4 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-500 hover:to-emerald-400 text-white font-medium shadow-glow transition transform hover:-translate-y-0.5">
+              <span class="inline-flex items-center gap-2">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z" fill="white"/>
+                </svg>
+                Sign in
+              </span>
+            </button>
+            <button id="guestBtn"
+                    class="px-5 py-4 rounded-xl bg-slate-800 hover:bg-slate-700/70 text-slate-100 font-medium border border-slate-700 transition transform hover:-translate-y-0.5">
+              Continue as guest
+            </button>
+          </div>
+          <p class="text-xs text-slate-400">By continuing, you agree to our friendly chat guidelines.</p>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-6 bg-gradient-to-tr from-emerald-400/10 to-brand-400/10 rounded-2xl blur-xl"></div>
+          <div class="relative rounded-2xl border border-slate-700 bg-slate-900/50 p-5 shadow-lg">
+            <div class="flex items-start gap-3 animate-slideUp">
+              <div class="h-9 w-9 rounded-full bg-gradient-to-br from-emerald-400 to-brand-500 flex items-center justify-center shadow-glow">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v1H6a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V10a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Z" fill="currentColor"/></svg>
+              </div>
+              <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-3 shadow-inner">
+                <p class="text-sm text-slate-200">Hey there! I’m your campus guide.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 mt-3 animate-slideUp" style="animation-delay:.06s">
+              <div class="h-9 w-9 rounded-full bg-gradient-to-br from-emerald-400 to-brand-500 flex items-center justify-center shadow-glow opacity-0 pointer-events-none"></div>
+              <div class="bg-slate-800/70 border border-slate-700 rounded-2xl p-3 shadow-inner">
+                <p class="text-sm text-slate-200">Ask me about admissions, fees, scholarships, or student life!</p>
+              </div>
+            </div>
+            <div class="mt-4 flex gap-2">
+              <span class="h-2 w-2 rounded-full bg-emerald-400 animate-bounce"></span>
+              <span class="h-2 w-2 rounded-full bg-emerald-300 animate-bounce" style="animation-delay:.1s"></span>
+              <span class="h-2 w-2 rounded-full bg-emerald-200 animate-bounce" style="animation-delay:.2s"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2: Chat Interface -->
+      <div id="chatView" class="hidden">
+        <div class="grid md:grid-cols-12 gap-0">
+          <!-- Sidebar: FAQ + History -->
+          <aside class="md:col-span-4 border-r border-slate-700/60 p-4 sm:p-6 space-y-6">
+            <div>
+              <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-wider">FAQs</h4>
+              <div class="mt-3 max-h-56 overflow-y-auto thin-scroll space-y-2">
+                <button class="faq-item w-full text-left p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 hover:bg-slate-700/60 transition text-sm">
+                  What programs are offered?
+                </button>
+                <button class="faq-item w-full text-left p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 hover:bg-slate-700/60 transition text-sm">
+                  How do I apply for scholarships?
+                </button>
+                <button class="faq-item w-full text-left p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 hover:bg-slate-700/60 transition text-sm">
+                  What are the tuition fees?
+                </button>
+                <button class="faq-item w-full text-left p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 hover:bg-slate-700/60 transition text-sm">
+                  Is on-campus housing available?
+                </button>
+                <button class="faq-item w-full text-left p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 hover:bg-slate-700/60 transition text-sm">
+                  How can I contact admissions?
+                </button>
+              </div>
+            </div>
+            <div>
+              <h4 class="text-sm font-semibold text-slate-200 uppercase tracking-wider">History</h4>
+              <div class="mt-3 h-24 rounded-xl bg-slate-800/40 border border-slate-700/60 flex items-center justify-center text-slate-400 text-sm shadow-inner">
+                History will appear here
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main Chat -->
+          <main class="md:col-span-8 flex flex-col min-h-[60vh] max-h-[70vh]">
+
+            <!-- Messages -->
+
+            <div id="messages"
+     class="flex-1 overflow-y-auto thin-scroll p-4 sm:p-6 space-y-4 relative bg-transparent">
+                  <!-- Background image layer -->
+  <!-- Background Video Layer -->
+ 
+
+              <!-- Initial bot message -->
+              <div class="flex items-start gap-3">
+                <div class="h-9 w-9 rounded-full bg-gradient-to-br from-emerald-400 to-brand-500 flex items-center justify-center shadow-glow">
+                  <svg class="w-5 h-5 text-white" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v1H6a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V10a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Z" fill="currentColor"/></svg>
+                </div>
+                <div class="max-w-[90%] sm:max-w-[80%] bg-slate-800/70 border border-slate-700 rounded-2xl p-3 shadow-inner">
+                  <p class="text-sm text-slate-200">Hi! I’m your saarthi. Ask me anything about the college.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Composer -->
+            <div class="border-t border-slate-700/60 p-4 sm:p-5 bg-slate-900/70" style="border-radius: 20px;" >
+
+              <div class="flex items-end gap-3">
+                <div class="hidden sm:flex flex-col items-center justify-center">
+                  <div class="h-9 w-9 rounded-full bg-gradient-to-br from-emerald-400 to-brand-500 shadow-glow animate-floaty"></div>
+                </div>
+                <div class="relative flex-1">
+                  <input id="chatInput"
+                         class="w-full px-4 py-3 rounded-2xl bg-slate-800/80 border border-slate-700/70 text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 shadow-inner"
+                         placeholder="Type your message..." />
+                  <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400">Press Enter</div>
+                </div>
+                <button id="sendBtn"
+                        class="h-12 px-5 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-500 text-white font-medium shadow-glow hover:to-emerald-400 active:scale-[.98] transition">
+                  Send
+                </button>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Elements
+    const yearEl = document.getElementById('year');
+    const triggerBtn = document.getElementById('chatTrigger');
+    const overlay = document.getElementById('chatOverlay');
+    const backdrop = document.getElementById('backdrop');
+    const modal = document.getElementById('chatModal');
+    const closeBtn = document.getElementById('closeBtn');
+    const minimizeBtn = document.getElementById('minimizeBtn');
+    const authView = document.getElementById('authView');
+    const chatView = document.getElementById('chatView');
+    const signInBtn = document.getElementById('signInBtn');
+    const guestBtn = document.getElementById('guestBtn');
+    const messages = document.getElementById('messages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const faqButtons = () => Array.from(document.querySelectorAll('.faq-item'));
+
+    // Helpers
+    const nowYear = new Date().getFullYear();
+    if (yearEl) yearEl.textContent = nowYear;
+
+    const sleep = (ms) => new Promise(res => setTimeout(res, ms));
+
+    // API base detection: when opened via backend (http), use same origin; when opened from file://, use localhost:3000
+    const API_BASE = (function() {
+      try {
+        return (window.location.origin && window.location.origin.startsWith('http')) ? '' : 'http://localhost:3000';
+      } catch (_) {
+        return 'http://localhost:3000';
+      }
+    })();
+
+    // Persistent session id for context
+    function getSessionId() {
+      try {
+        const key = 'saarthi_session_id';
+        let id = localStorage.getItem(key);
+        if (!id) {
+          const gen = (typeof crypto !== 'undefined' && crypto.randomUUID) ? crypto.randomUUID() : ('sess-' + Math.random().toString(36).slice(2));
+          id = gen;
+          localStorage.setItem(key, id);
+        }
+        return id;
+      } catch (_) {
+        return 'guest';
+      }
+    }
+
+    function showOverlay() {
+      overlay.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        modal.classList.remove('opacity-0', 'scale-95');
+        modal.classList.add('opacity-100', 'scale-100');
+      });
+    }
+
+    function hideOverlay() {
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+      modal.classList.remove('opacity-100', 'scale-100');
+      modal.classList.add('opacity-0', 'scale-95');
+      // after transition
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        // Reset to auth on close for a clean experience (optional)
+        showAuthView();
+      }, 250);
+    }
+
+    function showAuthView() {
+      chatView.classList.add('hidden');
+      authView.classList.remove('hidden');
+      authView.classList.add('animate-slideUp');
+      setTimeout(() => authView.classList.remove('animate-slideUp'), 450);
+    }
+
+    function showChatView() {
+      authView.classList.add('hidden');
+      chatView.classList.remove('hidden');
+      chatView.classList.add('animate-slideUp');
+      setTimeout(() => chatView.classList.remove('animate-slideUp'), 450);
+      chatInput?.focus();
+    }
+
+    async function fakeSignInFlow() {
+      // A tiny playful delay/animation to feel alive
+      signInBtn.disabled = true;
+      signInBtn.innerHTML = `<span class="inline-flex items-center gap-2">
+        <svg class="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="white" stroke-opacity=".25" stroke-width="3"/>
+          <path d="M21 12a9 9 0 0 0-9-9" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        </svg> Signing in...
+      </span>`;
+      await sleep(800);
+      showChatView();
+      signInBtn.disabled = false;
+      signInBtn.textContent = "Sign in";
+      botReply("You're signed in! How can I help today?");
+    }
+
+    // Chat utilities
+    function appendMessage({ text, from = 'bot' }) {
+      const wrapper = document.createElement('div');
+      wrapper.className = `flex items-start gap-3 ${from === 'user' ? 'justify-end' : ''}`;
+
+      const bubble = document.createElement('div');
+      const bubbleClasses = from === 'user'
+        ? 'max-w-[90%] sm:max-w-[80%] bg-emerald-500/20 border border-emerald-400/30 text-emerald-100 rounded-2xl p-3 shadow-inner'
+        : 'max-w-[90%] sm:max-w-[80%] bg-slate-800/70 border border-slate-700 rounded-2xl p-3 shadow-inner';
+
+      bubble.className = bubbleClasses;
+      bubble.innerHTML = `<p class="text-sm">${text}</p>`;
+
+      if (from === 'bot') {
+        const avatar = document.createElement('div');
+        avatar.className = 'h-9 w-9 rounded-full bg-gradient-to-br from-emerald-400 to-brand-500 flex items-center justify-center shadow-glow';
+        avatar.innerHTML = `<svg class="w-5 h-5 text-white" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v1H6a2 2 0 0 0-2 2v4a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V10a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Z" fill="currentColor"/></svg>`;
+        wrapper.appendChild(avatar);
+        wrapper.appendChild(bubble);
+      } else {
+        wrapper.appendChild(bubble);
+      }
+
+      messages.appendChild(wrapper);
+      messages.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
+    }
+
+    function showTyping() {
+      const typing = document.createElement('div');
+      typing.className = 'flex items-center gap-2 mt-1 ml-12';
+      typing.id = 'typing';
+      typing.innerHTML = `
+        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-bounce"></span>
+        <span class="h-2 w-2 rounded-full bg-emerald-300 animate-bounce" style="animation-delay:.1s"></span>
+        <span class="h-2 w-2 rounded-full bg-emerald-200 animate-bounce" style="animation-delay:.2s"></span>
+      `;
+      messages.appendChild(typing);
+      messages.scrollTo({ top: messages.scrollHeight, behavior: 'smooth' });
+    }
+
+    function hideTyping() {
+      const t = document.getElementById('typing');
+      if (t) t.remove();
+    }
+
+    function botReply(content) {
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        appendMessage({ text: content, from: 'bot' });
+      }, Math.min(1400, Math.max(500, content.length * 25)));
+    }
+
+    async function handleUserSend(text) {
+      if (!text || !text.trim()) return;
+      const msg = text.trim();
+      appendMessage({ text: msg, from: 'user' });
+
+      // Instant small-talk response (avoids network for greetings)
+      if (/(^|\s)(hi|hello|hey|namaste|namaskar|hola|yo)(\s|$)/i.test(msg)) {
+        botReply('Hi! I can help with semester dates, mid-terms, reviews, and practicals. What would you like to know?');
+        return;
+      }
+
+      showTyping();
+      sendBtn.disabled = true;
+
+      const payload = {
+        sessionId: getSessionId(),
+        message: msg,
+        channel: 'web'
+      };
+
+      try {
+        const res = await fetch(`${API_BASE}/api/message`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        hideTyping();
+        sendBtn.disabled = false;
+        botReply(data?.reply || "Sorry, I couldn't understand that.");
+      } catch (e) {
+        hideTyping();
+        sendBtn.disabled = false;
+        // Offline/local fallback: simple routing
+        const t = msg.toLowerCase();
+        if (t.includes('program') || t.includes('courses')) {
+          botReply("We offer 50+ programs across technology, business, arts, and sciences. What field are you interested in?");
+        } else if (t.includes('scholar') || t.includes('aid') || t.includes('fee')) {
+          botReply("Scholarships are merit- and need-based. Applications open with admissions—want guidance on eligibility?");
+        } else if (t.includes('housing') || t.includes('hostel') || t.includes('accommodation')) {
+          botReply("Yes, on-campus housing is available for first-year students. Would you like room types or fee details?");
+        } else if (t.includes('admission') || t.includes('apply')) {
+          botReply("You can apply online. I can walk you through deadlines, documents, and the application fee.");
+        } else if (t.includes('contact') || t.includes('email') || t.includes('phone')) {
+          botReply("Admissions: admissions@evergreencollege.edu, +91-98765-43210. Hours: Mon–Fri, 9:00–17:00 IST.");
+        } else {
+          botReply("I'm having trouble reaching the assistant. You can ask me about programs, fees, scholarships, housing, and admissions.");
+        }
+      }
+    }
+
+    // Events
+    triggerBtn.addEventListener('click', showOverlay);
+    closeBtn.addEventListener('click', hideOverlay);
+    backdrop.addEventListener('click', hideOverlay);
+    minimizeBtn.addEventListener('click', hideOverlay);
+
+    signInBtn.addEventListener('click', fakeSignInFlow);
+    guestBtn.addEventListener('click', () => {
+      showChatView();
+      botReply("You're in as a guest. How can I help today?");
+    });
+
+    sendBtn.addEventListener('click', () => handleUserSend(chatInput.value) || (chatInput.value = ''));
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleUserSend(chatInput.value);
+        chatInput.value = '';
+      }
+    });
+
+    // FAQ interactions
+    function bindFaq() {
+      faqButtons().forEach(btn => {
+        btn.addEventListener('click', () => {
+          const q = btn.textContent.trim();
+          handleUserSend(q);
+        });
+      });
+    }
+    // Bind on load and also when chatView shows (in case of dynamic content)
+    bindFaq();
+
+    // Accessibility: close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) hideOverlay();
+    });
+
+    // Animate opening transition by default values
+    // Initialize modal scale for smooth first open
+    modal.classList.add('scale-95', 'opacity-0');
+  </script>
+</body>
+</html>

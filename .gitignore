@@ -1,0 +1,23 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Logs & temp files
+logs/
+*.log
+content/tmp/
+
+# Vercel & build outputs
+.vercel
+dist/
+build/
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

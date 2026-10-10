@@ -1,0 +1,107 @@
+[
+  {
+    "id": "aug_commencement_btech7",
+    "title": "August: B.Tech 7th Sem Academic Commencement",
+    "questions": {"en": ["When does B.Tech 7th Sem start?", "7th semester commencement date", "When is B.Tech 7 sem academic commencement?", "BTech 7th sem classes start"]},
+    "keywords": {"en": ["august", "aug", "commencement", "start", "b.tech", "7", "7th", "semester"]},
+    "answers": {"en": "1 Aug: B.Tech 7 Sem Academic Commencement."}
+  },
+  {
+    "id": "aug_project_review_1_btech7",
+    "title": "August: B.Tech-7th Sem Project Review-1",
+    "questions": {"en": ["When is B.Tech 7th sem project review 1?", "Project Review-1 date for 7th sem"]},
+    "keywords": {"en": ["august", "project", "review", "review-1", "btech", "7th"]},
+    "answers": {"en": "5-7 Aug: B.Tech-7th Sem Project Review-1."}
+  },
+  {
+    "id": "aug_st1_assessment_btech7",
+    "title": "August: B.Tech 7 Sem ST-1 Theory Assessment",
+    "questions": {"en": ["ST1 dates for B.Tech 7th sem", "When is ST-1 for 7th semester?"]},
+    "keywords": {"en": ["st1", "st-1", "assessment", "theory", "august", "7th"]},
+    "answers": {"en": "18-20 Aug: B.Tech 7 Sem - ST 1 Theory Assessment."}
+  },
+  {
+    "id": "aug_practical_assessment_btech7",
+    "title": "August: B.Tech 7 Sem Practical Assessment",
+    "questions": {"en": ["When are B.Tech 7th sem practicals in Aug?", "7th sem practical assessment August"]},
+    "keywords": {"en": ["practical", "assessment", "august", "7th"]},
+    "answers": {"en": "28-29 Aug: B.Tech 7 Sem Practical Assessment."}
+  },
+  {
+    "id": "sept_st2_btech7",
+    "title": "September: B.Tech 7 Sem ST-2 Theory Assessment",
+    "questions": {"en": ["When is ST2 for B.Tech 7th sem?", "ST-2 dates September"]},
+    "keywords": {"en": ["september", "sept", "st2", "st-2", "theory", "assessment"]},
+    "answers": {"en": "1-3 Sept: B.Tech 7 Sem-ST2 Theory Assessment."}
+  },
+  {
+    "id": "sept_project_review_2_btech7",
+    "title": "September: B.Tech-7th Sem Project Review-2",
+    "questions": {"en": ["When is 7th sem project review 2?", "Project Review-2 Sept 7th sem"]},
+    "keywords": {"en": ["september", "project", "review-2", "btech", "7th"]},
+    "answers": {"en": "4-5 Sept: B.Tech-7th Sem Project Review-2."}
+  },
+  {
+    "id": "oct_midterm1_all",
+    "title": "October: Mid Term-1 (B.Tech., M.Tech., MCA 1st/3rd/5th)",
+    "questions": {"en": ["When is Mid Term 1?", "Midterm-1 schedule October", "Mid term dates"]},
+    "keywords": {"en": ["october", "mid", "midterm", "mid term", "mt1", "exam"]},
+    "answers": {"en": "6-10 Oct: Mid Term-1 for B.Tech., M.Tech., MCA 1st, 3rd, 5th semester."}
+  },
+  {
+    "id": "oct_practical_assessment_1_all",
+    "title": "October: Practical Assessment-1",
+    "questions": {"en": ["When are October practicals?", "Practical Assessment-1 dates"]},
+    "keywords": {"en": ["october", "practical", "assessment-1"]},
+    "answers": {"en": "27-31 Oct: Practical Assessment-1 for B.Tech., M.Tech., MCA 1st, 3rd, 5th semester."}
+  },
+  {
+    "id": "oct_diwali_holidays",
+    "title": "October: Diwali Holidays",
+    "questions": {"en": ["When are Diwali holidays?", "Diwali break dates"]},
+    "keywords": {"en": ["october", "diwali", "holidays"]},
+    "answers": {"en": "20-25 Oct: Diwali Holidays."}
+  },
+  {
+    "id": "nov_midterm2_all",
+    "title": "November: Mid Term-2 (B.Tech., M.Tech., MCA 1st/3rd/5th)",
+    "questions": {"en": ["When is Mid Term 2?", "Midterm-2 schedule November"]},
+    "keywords": {"en": ["november", "midterm", "mid term", "mt2"]},
+    "answers": {"en": "17-21 Nov: Mid Term-2 for B.Tech., M.Tech., MCA 1st, 3rd, 5th semester."}
+  },
+  {
+    "id": "nov_project_reviews",
+    "title": "November: Project Reviews",
+    "questions": {"en": ["When are November project reviews?", "Project reviews November schedule"]},
+    "keywords": {"en": ["november", "project", "review"]},
+    "answers": {"en": "17-19 Nov: M.Tech/MCA 1st/3rd Sem Project Review-2; 2nd week: B.Tech-7th Sem Project Review-3."}
+  },
+  {
+    "id": "dec_practical_and_exams",
+    "title": "December: Practicals and End Semester Exams",
+    "questions": {"en": ["When are December practicals?", "When are end semester exams?"]},
+    "keywords": {"en": ["december", "practical", "end semester"]},
+    "answers": {"en": "1-5 Dec: Practicals (B.Tech., M.Tech., MCA 1st/3rd/5th); 24 Dec-7 Jan: End Semester Examination (B.Tech., M.Tech., MCA 1st/3rd/5th/7th)."}
+  },
+  {
+    "id": "dec_makeup_midterm",
+    "title": "December: Make-up of Mid Term (ST-3)",
+    "questions": {"en": ["Is there a makeup midterm?", "ST-3 schedule"]},
+    "keywords": {"en": ["december", "make-up", "mid term", "st3", "st-3"]},
+    "answers": {"en": "15-19 Dec: Make-up of Mid Term (ST-3) for B.Tech., M.Tech., MCA 1st/3rd/5th."}
+  },
+  {
+    "id": "jan_external_practicals",
+    "title": "January: External Practical Assessment",
+    "questions": {"en": ["When are external practicals?", "External practical assessment January"]},
+    "keywords": {"en": ["january", "external", "practical", "assessment"]},
+    "answers": {"en": "8-14 Jan: External Practical Assessment (B.Tech., M.Tech., MCA 1st/3rd/5th/7th)."}
+  },
+  {
+    "id": "jan_academic_commencement_even",
+    "title": "January: Even Semester Academic Commencement",
+    "questions": {"en": ["When do even semester classes start?", "Academic Commencement January even semester"]},
+    "keywords": {"en": ["january", "commencement", "even", "2nd", "4th", "6th", "8th"]},
+    "answers": {"en": "21 Jan: Academic Commencement for B.Tech, M.Tech, MCA 2nd, 4th, 6th, 8th Semester."}
+  }
+]

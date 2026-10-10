@@ -1,0 +1,30 @@
+{
+  "name": "saarthi-backend",
+  "version": "1.0.0",
+  "description": "Multilingual conversational assistant backend for SaarThi (Evergreen College)",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "ingest": "node tools/ingest.js"
+  },
+  "keywords": [
+    "chatbot",
+    "college",
+    "multilingual",
+    "faq",
+    "context",
+    "logging"
+  ],
+  "author": "Student Innovators",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-fetch": "^2.7.0",
+    "wink-bm25-text-search": "^3.0.1",
+    "wink-nlp-utils": "^1.0.0"
+  }
+}
