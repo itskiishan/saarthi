@@ -19,12 +19,20 @@ const nlp = require('wink-nlp-utils');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Ensure folders exist
+const IS_VERCEL = !!process.env.VERCEL;
+
+// Ensure folders exist for local development
 const ROOT = __dirname;
 const CONTENT_DIR = path.join(ROOT, 'content');
 const LOG_DIR = path.join(ROOT, 'logs');
-if (!fs.existsSync(CONTENT_DIR)) fs.mkdirSync(CONTENT_DIR);
-if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR);
+if (!IS_VERCEL) {
+  try {
+    if (!fs.existsSync(CONTENT_DIR)) fs.mkdirSync(CONTENT_DIR, { recursive: true });
+    if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
+  } catch (e) {
+    console.warn('Warning: Could not create local directories:', e.message);
+  }
+}
 
 // Load FAQs (legacy curated KB; we also support free-text KB below)
 const FAQ_PATH = path.join(CONTENT_DIR, 'faqs.json');
@@ -335,8 +343,6 @@ function redactPII(text) {
 }
 
 function logEvent(evt) {
-  const day = new Date().toISOString().slice(0, 10);
-  const file = path.join(LOG_DIR, `${day}.jsonl`);
   const safe = {
     timestamp: new Date().toISOString(),
     sessionId: evt.sessionId,
@@ -348,7 +354,15 @@ function logEvent(evt) {
     lang: evt.lang || null,
     fallback: !!evt.fallback
   };
-  fs.appendFile(file, JSON.stringify(safe) + '\n', () => {});
+  console.log(`[EVENT] session=${safe.sessionId} channel=${safe.channel} intent=${safe.intentId} conf=${safe.confidence} fallback=${safe.fallback}`);
+  if (IS_VERCEL) return;
+  try {
+    const day = new Date().toISOString().slice(0, 10);
+    const file = path.join(LOG_DIR, `${day}.jsonl`);
+    fs.appendFile(file, JSON.stringify(safe) + '\n', () => {});
+  } catch (e) {
+    // Ignore log file write errors in serverless/read-only environments
+  }
 }
 
 // Routes
@@ -456,6 +470,9 @@ app.post('/api/message', async (req, res) => {
 
 // Logs (today) — basic convenience for review
 app.get('/api/logs/today', (req, res) => {
+  if (IS_VERCEL) {
+    return res.status(404).json({ error: 'Local file logging is disabled in Vercel serverless environment. Check Vercel Function logs.' });
+  }
   const day = new Date().toISOString().slice(0, 10);
   const file = path.join(LOG_DIR, `${day}.jsonl`);
   if (!fs.existsSync(file)) return res.status(404).json({ error: 'No logs for today yet.' });
